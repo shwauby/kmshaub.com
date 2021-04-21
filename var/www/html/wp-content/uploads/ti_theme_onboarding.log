@@ -1,0 +1,19 @@
+[06/Feb/2021:22:15:36] (I): WordPress Instance Info:
+[06/Feb/2021:22:15:36] (I): Home URL : https://kmshaub.com
+[06/Feb/2021:22:15:36] (I): Site URL : https://kmshaub.com
+[06/Feb/2021:22:15:36] (I): WordPress Version : 5.6.1
+[06/Feb/2021:22:15:36] (I): Onboarding Version : 1.1.2
+[06/Feb/2021:22:15:36] (I): Multisite : No
+[06/Feb/2021:22:15:36] (I): Server Info : Apache
+[06/Feb/2021:22:15:36] (I): PHP Version : 7.4.9
+[06/Feb/2021:22:15:36] (I): HTTPS : Yes
+[06/Feb/2021:22:15:36] (I): PHP Max Execution Time : 120
+[06/Feb/2021:22:15:36] (I): PHP Max Input Vars : 1000
+[06/Feb/2021:22:15:36] (I): Max Upload Size : 104857600
+[06/Feb/2021:22:15:36] (I): Plugins:
+[06/Feb/2021:22:15:36] (I): [PLUGIN] Elementor : v3.1.1 (Elementor.com)
+[06/Feb/2021:22:15:36] (I): [PLUGIN] Templates Patterns Collection : v1.1.2 (ThemeIsle)
+[06/Feb/2021:22:15:36] (I): [PLUGIN] Orbit Fox Companion : v2.10.3 (Themeisle)
+[06/Feb/2021:22:15:36] (I): [PLUGIN] WP File Manager : v6.9 (mndpsingh287)
+[06/Feb/2021:22:15:36] (I): [PLUGIN] WP Mail SMTP : v2.6.0 (WPForms)
+[06/Feb/2021:22:15:36] (I): [PLUGIN] WPForms Lite : v1.6.4.1 (WPForms)
