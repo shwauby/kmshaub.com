@@ -1222,6 +1222,22 @@ class Visual_Portfolio_Get {
                 $images = $options['images'];
             }
 
+            $images_ids = array();
+            foreach ( $images as $k => $img ) {
+                $images_ids[] = (int) $img['id'];
+            }
+
+            // Find all used attachments.
+            $all_attachments = get_posts(
+                array(
+                    'post_type'      => 'attachment',
+                    'posts_per_page' => -1,
+                    'showposts'      => -1,
+                    'paged'          => -1,
+                    'post__in'       => $images_ids,
+                )
+            );
+
             // prepare titles and descriptions.
             foreach ( $images as $k => $img ) {
                 $img_meta = array(
@@ -1233,7 +1249,14 @@ class Visual_Portfolio_Get {
                     'date'        => '',
                 );
 
-                $attachment = get_post( $img['id'] );
+                // Find current attachment post data.
+                $attachment = false;
+                foreach ( $all_attachments as $post ) {
+                    if ( $post->ID === (int) $img['id'] ) {
+                        $attachment = $post;
+                        break;
+                    }
+                }
 
                 if ( $attachment ) {
                     // get image meta if needed.
@@ -1316,15 +1339,19 @@ class Visual_Portfolio_Get {
                         $images = $new_images;
                         break;
                     case 'rand':
-                        // phpcs:ignore
-                        mt_srand( self::get_rand_seed_session() );
-
-                        for ( $i = count( $images ) - 1; $i > 0; $i-- ) {
+                        // We don't need to randomize order for filter,
+                        // because filter list will be always changed once AJAX loaded.
+                        if ( ! $for_filter ) {
                             // phpcs:ignore
-                            $j            = @mt_rand( 0, $i );
-                            $tmp          = $images[ $i ];
-                            $images[ $i ] = $images[ $j ];
-                            $images[ $j ] = $tmp;
+                            mt_srand( self::get_rand_seed_session() );
+
+                            for ( $i = count( $images ) - 1; $i > 0; $i-- ) {
+                                // phpcs:ignore
+                                $j            = @mt_rand( 0, $i );
+                                $tmp          = $images[ $i ];
+                                $images[ $i ] = $images[ $j ];
+                                $images[ $j ] = $tmp;
+                            }
                         }
 
                         break;
@@ -1391,7 +1418,11 @@ class Visual_Portfolio_Get {
                         break;
 
                     case 'menu_order':
-                        $query_opts['orderby'] = 'menu_order';
+                        // We should order by `menu_order` and as fallback order by `post_date`.
+                        $query_opts['orderby'] = array(
+                            'menu_order' => $options['posts_order_direction'],
+                            'post_date'  => 'desc',
+                        );
                         break;
 
                     case 'comment_count':
@@ -1429,14 +1460,26 @@ class Visual_Portfolio_Get {
                     parse_str( html_entity_decode( $options['posts_custom_query'] ), $tmp_arr );
                     $query_opts = array_merge( $query_opts, $tmp_arr );
                 } elseif ( 'current_query' === $options['posts_source'] ) {
-                    $query_vars = $GLOBALS['wp_query']->query_vars;
+                    global $wp_query;
 
-                    // Add pagination paged value.
-                    if ( $query_opts['paged'] && ( ! isset( $query_vars['paged'] ) || ! $query_vars['paged'] ) ) {
-                        $query_vars['paged'] = $query_opts['paged'];
+                    if ( $wp_query && isset( $wp_query->query_vars ) && is_array( $wp_query->query_vars ) ) {
+                        // Unset `offset` because if is set, $wp_query overrides/ignores the paged parameter and breaks pagination.
+                        if ( isset( $query_opts['offset'] ) ) {
+                            unset( $query_opts['offset'] );
+                        }
+
+                        $query_opts = wp_parse_args( $wp_query->query_vars, $query_opts );
+
+                        // Add post type.
+                        if ( empty( $query_opts['post_type'] ) && is_singular() ) {
+                            $query_opts['post_type'] = get_post_type( get_the_ID() );
+                        }
+
+                        // Add pagination paged value.
+                        if ( $query_opts['paged'] && ( ! isset( $wp_query->query_vars['paged'] ) || ! $wp_query->query_vars['paged'] ) ) {
+                            $wp_query->query_vars['paged'] = $query_opts['paged'];
+                        }
                     }
-
-                    $query_opts = $query_vars;
                 } else {
                     $query_opts['post_type'] = $options['posts_source'];
 

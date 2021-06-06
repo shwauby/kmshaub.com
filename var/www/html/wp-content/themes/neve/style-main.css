@@ -2060,6 +2060,12 @@ audio {
   padding: 0;
 }
 
+.widget .post-date {
+  display: block;
+  font-size: .9em;
+  opacity: .7;
+}
+
 .widget ul {
   padding: 0;
 }

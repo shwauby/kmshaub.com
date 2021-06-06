@@ -1,4 +1,4 @@
-/*! elementor - v3.1.4 - 10-03-2021 */
+/*! elementor - v3.2.4 - 26-05-2021 */
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["toggle"],{
 
 /***/ "../assets/dev/js/frontend/handlers/toggle.js":

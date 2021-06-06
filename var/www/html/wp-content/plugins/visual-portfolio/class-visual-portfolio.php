@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  Visual Portfolio, Posts & Image Gallery
  * Description:  Modern gallery and portfolio plugin with advanced layouts editor. Clean and powerful gallery styles with enormous settings in the Gutenberg block.
- * Version:      2.11.1
+ * Version:      2.12.1
  * Author:       nK
  * Author URI:   https://nkdev.info
  * License:      GPLv2 or later
@@ -113,6 +113,9 @@ class Visual_Portfolio {
      * Activation Hook
      */
     public function activation_hook() {
+        // Welcome Page Flag.
+        set_transient( '_visual_portfolio_welcome_screen_activation_redirect', true, 30 );
+
         flush_rewrite_rules();
     }
 
@@ -141,9 +144,12 @@ class Visual_Portfolio {
         require_once $this->plugin_path . 'classes/class-parse-blocks.php';
         require_once $this->plugin_path . 'classes/class-assets.php';
         require_once $this->plugin_path . 'classes/class-breakpoints.php';
+        require_once $this->plugin_path . 'classes/class-image-placeholder.php';
 
         // this settings class order is required.
         require_once $this->plugin_path . 'classes/class-settings.php';
+        require_once $this->plugin_path . 'classes/class-welcome-screen.php';
+        require_once $this->plugin_path . 'classes/class-ask-review.php';
         require_once $this->plugin_path . 'classes/class-images.php';
         require_once $this->plugin_path . 'classes/class-rest.php';
         require_once $this->plugin_path . 'classes/class-get-portfolio.php';
@@ -279,5 +285,5 @@ function visual_portfolio() {
 }
 add_action( 'plugins_loaded', 'visual_portfolio' );
 
-register_deactivation_hook( __FILE__, array( visual_portfolio(), 'activation_hook' ) );
-register_activation_hook( __FILE__, array( visual_portfolio(), 'deactivation_hook' ) );
+register_activation_hook( __FILE__, array( visual_portfolio(), 'activation_hook' ) );
+register_deactivation_hook( __FILE__, array( visual_portfolio(), 'deactivation_hook' ) );

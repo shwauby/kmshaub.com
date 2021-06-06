@@ -20,29 +20,31 @@ use Composer\Semver\VersionParser;
 
 
 
+
+
 class InstalledVersions
 {
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'v2.11.1',
-    'version' => '2.11.1.0',
+    'pretty_version' => 'v2.11.6',
+    'version' => '2.11.6.0',
     'aliases' => 
     array (
     ),
-    'reference' => '4186d70efed6b96f9f7476d8451fba6a1c28eb71',
+    'reference' => 'a98d35be05d18228f1d07d9f3eba9e5d9008b00b',
     'name' => 'codeinwp/neve',
   ),
   'versions' => 
   array (
     'codeinwp/neve' => 
     array (
-      'pretty_version' => 'v2.11.1',
-      'version' => '2.11.1.0',
+      'pretty_version' => 'v2.11.6',
+      'version' => '2.11.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4186d70efed6b96f9f7476d8451fba6a1c28eb71',
+      'reference' => 'a98d35be05d18228f1d07d9f3eba9e5d9008b00b',
     ),
     'codeinwp/themeisle-sdk' => 
     array (
@@ -79,7 +81,6 @@ $packages = array();
 foreach (self::getInstalled() as $installed) {
 $packages[] = array_keys($installed['versions']);
 }
-
 
 if (1 === \count($packages)) {
 return $packages[0];
@@ -244,9 +245,23 @@ return $installed[0]['root'];
 
 
 
+
 public static function getRawData()
 {
+@trigger_error('getRawData only returns the first dataset loaded, which may not be what you expect. Use getAllRawData() instead which returns all datasets for all autoloaders present in the process.', E_USER_DEPRECATED);
+
 return self::$installed;
+}
+
+
+
+
+
+
+
+public static function getAllRawData()
+{
+return self::getInstalled();
 }
 
 
@@ -272,6 +287,7 @@ public static function reload($data)
 self::$installed = $data;
 self::$installedByVendor = array();
 }
+
 
 
 

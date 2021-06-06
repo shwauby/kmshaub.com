@@ -33,9 +33,9 @@ class Visual_Portfolio_3rd_Elementor_Widget extends \Elementor\Widget_Base {
 
         if ( $this->is_preview_mode() ) {
             wp_register_script( 'iframe-resizer', visual_portfolio()->plugin_url . 'assets/vendor/iframe-resizer/js/iframeResizer.min.js', '', '4.2.11', true );
-            wp_register_script( 'visual-portfolio-elementor', visual_portfolio()->plugin_url . 'assets/admin/js/elementor.min.js', array( 'elementor-frontend', 'iframe-resizer', 'jquery' ), '2.11.1', true );
+            wp_register_script( 'visual-portfolio-elementor', visual_portfolio()->plugin_url . 'assets/admin/js/elementor.min.js', array( 'elementor-frontend', 'iframe-resizer', 'jquery' ), '2.12.1', true );
 
-            wp_register_style( 'visual-portfolio-elementor', visual_portfolio()->plugin_url . 'assets/admin/css/elementor.min.css', array(), '2.11.1' );
+            wp_register_style( 'visual-portfolio-elementor', visual_portfolio()->plugin_url . 'assets/admin/css/elementor.min.css', array(), '2.12.1' );
             wp_style_add_data( 'visual-portfolio-elementor', 'rtl', 'replace' );
             wp_style_add_data( 'visual-portfolio-elementor', 'suffix', '.min' );
         }

@@ -2,7 +2,7 @@
  * Additional js for frontend VC
  *
  * Name    : Visual Portfolio
- * Version : 2.11.1
+ * Version : 2.12.1
  * Author  : nK https://nkdev.info
  */
 const {

@@ -98,6 +98,7 @@ class Visual_Portfolio_Gutenberg_Block {
                         'type' => 'object',
                     );
                     break;
+                case 'notice':
                 case 'pro_note':
                     unset( $attributes[ $control['name'] ] );
                     break;
@@ -173,14 +174,14 @@ class Visual_Portfolio_Gutenberg_Block {
             'visual-portfolio-gutenberg',
             plugins_url( '../gutenberg/index.min.js', __FILE__ ),
             array( 'wp-editor', 'wp-i18n', 'wp-element', 'wp-components', 'jquery' ),
-            '2.11.1',
+            '2.12.1',
             true
         );
         wp_enqueue_style(
             'visual-portfolio-gutenberg',
             plugins_url( '../gutenberg/style.min.css', __FILE__ ),
             array(),
-            '2.11.1'
+            '2.12.1'
         );
         wp_style_add_data( 'visual-portfolio-gutenberg', 'rtl', 'replace' );
         wp_style_add_data( 'visual-portfolio-gutenberg', 'suffix', '.min' );
@@ -201,7 +202,7 @@ class Visual_Portfolio_Gutenberg_Block {
             'visual-portfolio-gutenberg-custom-post-meta',
             plugins_url( '../gutenberg/custom-post-meta.min.js', __FILE__ ),
             array( 'wp-editor', 'wp-i18n', 'wp-element', 'wp-components', 'wp-plugins', 'jquery' ),
-            '2.11.1',
+            '2.12.1',
             true
         );
 

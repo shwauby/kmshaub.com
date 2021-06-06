@@ -35,6 +35,13 @@ class Visual_Portfolio_Controls {
     private static $cached_all_registered_controls = array();
 
     /**
+     * Cached saved layout meta.
+     *
+     * @var array
+     */
+    private static $cached_saved_layout_meta = array();
+
+    /**
      * Default control args.
      *
      * @var array
@@ -53,6 +60,8 @@ class Visual_Portfolio_Controls {
         'readonly'         => false,
 
         // control-specific args.
+        // notice.
+        'status'           => 'info',
         // select.
         'options'          => array(),
         'searchable'       => false,
@@ -270,8 +279,26 @@ class Visual_Portfolio_Controls {
         $result = null;
 
         // get meta data from saved layout.
-        if ( $post_id && metadata_exists( 'post', $post_id, 'vp_' . $name ) ) {
-            $result = get_post_meta( $post_id, 'vp_' . $name, true );
+        // get all layout meta at once and cache them (works faster).
+        if ( $post_id ) {
+            if ( ! isset( self::$cached_saved_layout_meta[ $post_id ] ) ) {
+                $saved_meta  = get_post_meta( $post_id );
+                $result_meta = array();
+
+                // We should unserialize array data as in standard function https://developer.wordpress.org/reference/functions/get_metadata_raw/.
+                if ( is_array( $saved_meta ) ) {
+                    foreach ( $saved_meta as $key => $val ) {
+                        if ( isset( $val[0] ) ) {
+                            $result_meta[ $key ] = maybe_unserialize( $val[0] );
+                        }
+                    }
+                }
+
+                self::$cached_saved_layout_meta[ $post_id ] = $result_meta;
+            }
+            if ( isset( self::$cached_saved_layout_meta[ $post_id ] ) && isset( self::$cached_saved_layout_meta[ $post_id ][ 'vp_' . $name ] ) ) {
+                $result = self::$cached_saved_layout_meta[ $post_id ][ 'vp_' . $name ];
+            }
         }
 
         // registered data.

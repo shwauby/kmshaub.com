@@ -23,6 +23,14 @@ class Visual_Portfolio_Settings {
     public static $settings_api;
 
     /**
+     * Cached settings fields. We call settings fields method a lot of times to get default values.
+     * So, for performance reasons we need to cache the output.
+     *
+     * @var object
+     */
+    public static $cached_settings_fields;
+
+    /**
      * Visual_Portfolio_Settings constructor.
      */
     public function __construct() {
@@ -167,6 +175,10 @@ class Visual_Portfolio_Settings {
      * @return array settings fields
      */
     public static function get_settings_fields() {
+        if ( ! empty( self::$cached_settings_fields ) ) {
+            return self::$cached_settings_fields;
+        }
+
         $default_breakpoints = Visual_Portfolio_Breakpoints::get_default_breakpoints();
 
         $settings_fields = array(
@@ -186,8 +198,8 @@ class Visual_Portfolio_Settings {
                 ),
                 array(
                     'name'    => 'no_image',
-                    'label'   => esc_html__( 'No Image', 'visual-portfolio' ),
-                    'desc'    => esc_html__( 'This image used if the featured image of a post is not specified.', 'visual-portfolio' ),
+                    'label'   => esc_html__( 'Placeholder Image', 'visual-portfolio' ),
+                    'desc'    => esc_html__( 'This image used on items in layouts where image is not specified.', 'visual-portfolio' ),
                     'type'    => 'image',
                     'default' => '',
                     'options' => array(
@@ -579,7 +591,7 @@ class Visual_Portfolio_Settings {
                             <h3>' . esc_html__( 'Pro Feature', 'visual-portfolio' ) . '</h3>
                             <div>
                                 <p>' . esc_html__( 'Protect your works using watermarks', 'visual-portfolio' ) . '</p>
-                                <a class="vpf-settings-info-pro-button" target="_blank" rel="noopener noreferrer" href="https://visualportfolio.co/pro/?utm_source=freeplugin&utm_medium=link&utm_campaign=plugin_settings&utm_content=2.11.1">' . esc_html__( 'Read More', 'visual-portfolio' ) . '</a>
+                                <a class="vpf-settings-info-pro-button" target="_blank" rel="noopener noreferrer" href="https://visualportfolio.co/pro/?utm_source=freeplugin&utm_medium=link&utm_campaign=plugin_settings&utm_content=2.12.1">' . esc_html__( 'Read More', 'visual-portfolio' ) . '</a>
                             </div>
                         </div>
                     ',
@@ -594,7 +606,7 @@ class Visual_Portfolio_Settings {
                             <h3>' . esc_html__( 'Pro Feature', 'visual-portfolio' ) . '</h3>
                             <div>
                                 <p>' . esc_html__( 'Social feeds such as Instagram, Youtube, Flickr, Twitter, etc...', 'visual-portfolio' ) . '</p>
-                                <a class="vpf-settings-info-pro-button" target="_blank" rel="noopener noreferrer" href="https://visualportfolio.co/pro/?utm_source=freeplugin&utm_medium=link&utm_campaign=plugin_settings&utm_content=2.11.1">' . esc_html__( 'Read More', 'visual-portfolio' ) . '</a>
+                                <a class="vpf-settings-info-pro-button" target="_blank" rel="noopener noreferrer" href="https://visualportfolio.co/pro/?utm_source=freeplugin&utm_medium=link&utm_campaign=plugin_settings&utm_content=2.12.1">' . esc_html__( 'Read More', 'visual-portfolio' ) . '</a>
                             </div>
                         </div>
                     ',
@@ -609,7 +621,7 @@ class Visual_Portfolio_Settings {
                             <h3>' . esc_html__( 'Pro Feature', 'visual-portfolio' ) . '</h3>
                             <div>
                                 <p>' . esc_html__( 'Remove our plugin brand and logos from Front and Admin areas', 'visual-portfolio' ) . '</p>
-                                <a class="vpf-settings-info-pro-button" target="_blank" rel="noopener noreferrer" href="https://visualportfolio.co/pro/?utm_source=freeplugin&utm_medium=link&utm_campaign=plugin_settings&utm_content=2.11.1">' . esc_html__( 'Read More', 'visual-portfolio' ) . '</a>
+                                <a class="vpf-settings-info-pro-button" target="_blank" rel="noopener noreferrer" href="https://visualportfolio.co/pro/?utm_source=freeplugin&utm_medium=link&utm_campaign=plugin_settings&utm_content=2.12.1">' . esc_html__( 'Read More', 'visual-portfolio' ) . '</a>
                             </div>
                         </div>
                     ',
@@ -618,7 +630,9 @@ class Visual_Portfolio_Settings {
             ),
         );
 
-        return apply_filters( 'vpf_settings_fields', $settings_fields );
+        self::$cached_settings_fields = apply_filters( 'vpf_settings_fields', $settings_fields );
+
+        return self::$cached_settings_fields;
     }
 
     /**

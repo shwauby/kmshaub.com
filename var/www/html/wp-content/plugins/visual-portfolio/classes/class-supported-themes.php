@@ -80,7 +80,7 @@ class Visual_Portfolio_Supported_Themes {
     public function wp_enqueue_scripts() {
         $theme_compat = $this->get_theme_compatibility_style();
         if ( $theme_compat ) {
-            wp_enqueue_style( $theme_compat['name'], $theme_compat['url'], array(), '2.11.1' );
+            wp_enqueue_style( $theme_compat['name'], $theme_compat['url'], array(), '2.12.1' );
             wp_style_add_data( $theme_compat['name'], 'rtl', 'replace' );
             wp_style_add_data( $theme_compat['name'], 'suffix', '.min' );
         }

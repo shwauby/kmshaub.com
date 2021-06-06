@@ -46,6 +46,7 @@ const {
 const {
     PanelBody,
     Tooltip,
+    Notice,
     BaseControl,
     ButtonGroup,
     Button,
@@ -84,7 +85,7 @@ class ControlsRender extends Component {
         }
 
         // content source conditions.
-        if ( /^content-source-/g.test( category ) && 'content-source-additional' !== category && `content-source-${ attributes.content_source }` !== category ) {
+        if ( /^content-source-/g.test( category ) && 'content-source-general' !== category && `content-source-${ attributes.content_source }` !== category ) {
             return null;
         }
 
@@ -457,13 +458,23 @@ ControlsRender.Control = function( props ) {
             />
         );
         break;
+    case 'notice':
+        renderControl = (
+            renderControlHelp ? (
+                <Notice status={ props.status } isDismissible={ false }>
+                    { renderControlHelp }
+                </Notice>
+            ) : ''
+        );
+        renderControlHelp = false;
+        break;
     case 'pro_note':
         renderControl = (
             <ProNote title={ renderControlLabel }>
                 { renderControlHelp ? (
                     <p>{ renderControlHelp }</p>
                 ) : '' }
-                <ProNote.Button target="_blank" rel="noopener noreferrer" href="https://visualportfolio.co/pro/?utm_source=freeplugin&amp;utm_medium=link&amp;utm_campaign=block_settings&amp;utm_content=2.11.1">
+                <ProNote.Button target="_blank" rel="noopener noreferrer" href="https://visualportfolio.co/pro/?utm_source=freeplugin&amp;utm_medium=link&amp;utm_campaign=block_settings&amp;utm_content=2.12.1">
                     { __( 'Read More', 'visual-portfolio' ) }
                 </ProNote.Button>
             </ProNote>

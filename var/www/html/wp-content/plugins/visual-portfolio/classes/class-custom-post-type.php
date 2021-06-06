@@ -251,7 +251,7 @@ class Visual_Portfolio_Custom_Post_Type {
 
         global $wp_version;
 
-        $check_string = 'Plugin: 2.11.1 WP: ' . $wp_version;
+        $check_string = 'Plugin: 2.12.1 WP: ' . $wp_version;
 
         if ( get_option( 'visual_portfolio_updated_caps' ) === $check_string ) {
             return;

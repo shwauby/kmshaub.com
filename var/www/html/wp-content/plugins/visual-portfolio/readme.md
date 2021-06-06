@@ -1,22 +1,22 @@
-# Visual Portfolio, Posts & Image Gallery #
+# Visual Portfolio, Photo Gallery & Posts Grid #
 
 * Contributors: nko
 * Tags: portfolio, gallery, photo gallery, image gallery, wordpress gallery plugin
 * Requires at least: 5.4
 * Tested up to: 5.7
 * Requires PHP: 5.5.9
-* Stable tag: 2.11.1
+* Stable tag: 2.12.1
 * License: GPLv2 or later
 * License URI: <http://www.gnu.org/licenses/gpl-2.0.html>
 
-Modern gallery and portfolio plugin with advanced layouts editor. Clean and powerful gallery styles with enormous settings in the Gutenberg block.
+Modern photo gallery and portfolio plugin with advanced layouts editor. Clean gallery styles with powerful settings in the Gutenberg block.
 
 ## Description ##
 
 **Gallery & Portfolio Plugin For WordPress**
 ★★★★★<br>
 
-**Portfolio websites are the most popular nowadays.** We created <a href="https://visualportfolio.co/?utm_source=wporg&utm_medium=link&utm_campaign=demo" target="_blank">**Visual Portfolio, Posts & Image Gallery WordPress plugin**</a>, to help every creative, agency, or photographers get access to the powerful tools they need to showcase their beautiful works and attract more love from their potential and existing customers.
+**Portfolio websites are the most popular nowadays.** We created <a href="https://visualportfolio.co/?utm_source=wporg&utm_medium=link&utm_campaign=demo" target="_blank">**Visual Portfolio, Photo Gallery & Posts Grid WordPress plugin**</a>, to help every creative, agency, or photographers get access to the powerful tools they need to showcase their beautiful works and attract more love from their potential and existing customers.
 
 <a href="https://visualportfolio.co/?utm_source=wporg&utm_medium=link&utm_campaign=demo" target="_blank">See Live Demo</a> | <a href="https://visualportfolio.co/documentation/getting-started/?utm_source=wporg&utm_medium=link&utm_campaign=docs" target="_blank">Documentation</a> | <a href="https://github.com/nk-crew/visual-portfolio" target="_blank">GitHub</a>
 
@@ -136,13 +136,17 @@ Visual Portfolio gives you a wide range of filters and actions to customize ever
 * **Social Integrations**
 Automatically fetch posts from your social networks to display in gallery on your site.
 
-  * [Youtube](https://visualportfolio.co/social-youtube/)
   * [Instagram](https://visualportfolio.co/social-instagram/)
+  * [Youtube](https://visualportfolio.co/social-youtube/)
   * [Vimeo](https://visualportfolio.co/social-vimeo/)
-  * [Flickr](https://visualportfolio.co/social-flickr/)
+  * [Unsplash](https://visualportfolio.co/social-unsplash/)
   * [Twitter](https://visualportfolio.co/social-twitter/)
-  * [Dribbble](https://visualportfolio.co/social-dribbble/)
+  * [Flickr](https://visualportfolio.co/social-flickr/)
   * [Google Photos](https://visualportfolio.co/social-google-photos/)
+  * [Dribbble](https://visualportfolio.co/social-dribbble/)
+  * [Twitch](https://visualportfolio.co/social-twitch/)
+  * [RSS](https://visualportfolio.co/social-medium/)
+  * VK (Vkontakte)
 
 * **Stylish interaction effects**
 
@@ -299,6 +303,37 @@ For more information, feel free to visit [Visual Portfolio official website](htt
 
 ## Changelog ##
 
+= 2.12.1 =
+
+* added default images placeholder on first plugin install
+* changed images border radius option to use CSS variable
+* fixed possible PHP warning when retrieving saved layout meta
+* fixed posts menu_order wrong displaying items in some situations
+* fixed displaying random photos from Pro plugin social networks
+* fixed Video URL metabox displaying when changing the post format
+* fixed wrong callbacks for activation and deactivation hooks (wrong displaying Welcome Screen)
+
+= 2.12.0 =
+
+* added new social feeds support in Pro plugin:
+  * Unsplash
+  * Twitch
+  * VK (Vkontakte)
+  * RSS
+* added possibility to replace image in gallery control
+* added possibility to reorder manually selected posts
+* added posts order for Manual Selection
+* improved overall performance. In some (not all) galleries loading speed increased up to 20%
+* improved Aspect Ratio control rendering dynamic CSS
+* changed general options to collapsible panel
+* fixed large images (mostly 4k images) parser wrong data for lazyloading
+* fixed wrong filter categories when Images in Random Order
+* fixed displaying border-radius in Safari browser
+* fixed load more button background in loading state when button focused
+* fixed possible error with nested reusable blocks while parse page blocks
+* fixed custom CSS output `>` symbol
+* minor changes
+
 = 2.11.1 =
 
 * improved custom styles output in `<body>` - use JS to prevent w3c error
@@ -363,11 +398,11 @@ For more information, feel free to visit [Visual Portfolio official website](htt
 
 = 2.10.1 =
 
-* added setting to enable lazy loading for all images on site (not only for Visual Portfolio)
+* added setting to enable lazy loading for all images on site (not only for Visual Portfolio gallery)
 * changed preloader logo svg to img tag
 * fixed wrong path for Pro templates
 * fixed wrong name of link template
-* fixed popup gallery for old deprecated overlay class
+* fixed popup photo gallery for old deprecated overlay class
 
 = 2.10.0 =
 
@@ -391,7 +426,7 @@ For more information, feel free to visit [Visual Portfolio official website](htt
 * added option to completely hide the block if no items found
 * updated WPBakery shortcode icon
 * allow pointer events while AJAX loading
-* automatically enable popup gallery, when select Images source in Setup Wizard
+* automatically enable popup photo gallery, when select Images source in Setup Wizard
 * changed Custom CSS modal size
 * changed PhotoSwipe share URLs (share actual image urls)
 * fixed linear loading time decrease, when adding more blocks on the page
@@ -427,7 +462,7 @@ For more information, feel free to visit [Visual Portfolio official website](htt
 * added PHP filters to extend items: `vpf_each_item_tag_name` and `vpf_each_item_tag_attrs` <https://visualportfolio.co/documentation/developers/wordpress-filters/>
 * changed preloader animation (SVG logo with spinner)
 * changed item icon when click action is not popup gallery (display image icon instead of zoom)
-* changed image and layout settings dropdowns to modals
+* changed photo gallery and layout settings dropdowns to modals
 * fixed conflict of lazy loading and Imagify WebP feature
 * fixed Tiles layout resize position bug
 * fixed WordPress images popup when used lazy loading from Autoptimize
@@ -440,7 +475,7 @@ For more information, feel free to visit [Visual Portfolio official website](htt
 = 2.7.1 =
 
 * added legacy Swiper version, when Elementor plugin enabled (resolves conflict with it)
-* improved preview page code
+* improved gallery preview code
 * fixed Justify layout JS error
 
 = 2.7.0 =
@@ -451,7 +486,7 @@ For more information, feel free to visit [Visual Portfolio official website](htt
 * moved lazy loading to separate script (less page loading size, when you disable Lazy Loading feature in settings)
 * slightly improved performance by using raf-schd package
 * fixed Isotope re-layout when window resized and gallery items size changed, but container have static size
-* fixed iframe preview JS error
+* fixed iframe gallery preview JS error
 * fixed slider arrow color variable name
 * minor changes
 

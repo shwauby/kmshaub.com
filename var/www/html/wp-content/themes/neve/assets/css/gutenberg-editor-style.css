@@ -55,6 +55,14 @@
   letter-spacing: normal;
 }
 
+.editor-styles-wrapper .wp-block.has-text-color .wp-block {
+  color: inherit;
+}
+
+.editor-styles-wrapper .wp-block.wp-block-group.has-background {
+  padding: 0;
+}
+
 .editor-styles-wrapper .wp-block.components-placeholder {
   color: initial;
 }

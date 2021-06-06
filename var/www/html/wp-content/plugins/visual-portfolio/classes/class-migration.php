@@ -18,7 +18,7 @@ class Visual_Portfolio_Migrations {
      *
      * @var string
      */
-    protected $version = '2.11.1';
+    protected $version = '2.12.1';
 
     /**
      * Initial version.
